@@ -1,0 +1,1 @@
+insert into fish (id, freshwater, genus, species, tropical) values (3, true, 'Julidochromis', 'dickfeldi', true)

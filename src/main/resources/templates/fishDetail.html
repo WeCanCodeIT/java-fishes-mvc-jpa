@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title th:text="'Details for ' + ${fish.buildBinomialName()}" />
+</head>
+<body>
+	<h1 th:text="'Details for ' + ${fish.buildBinomialName()}" />
+	
+	<img th:src="'/images/' + ${fish.hasImage()? fish.image: 'no-fish-pic.png'}" th:alt="'image of ' + ${fish.buildBinomialName()}"/>
+</body>
+</html>

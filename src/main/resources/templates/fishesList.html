@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Fishes List!!</title>
+</head>
+<body>
+	<h1>List of Fishes</h1>
+	
+	<ul>
+		<li th:each="currentFish: ${fishes}"><a th:href="@{/fish(id=${currentFish.id})}" th:text="${currentFish.buildBinomialName()}" /></li>
+	</ul>
+</body>
+</html>
