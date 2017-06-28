@@ -46,4 +46,25 @@ public class FishesController {
 		model.addAttribute(selectedFish);
 		return "fishDetail";
 	}
+	
+	@RequestMapping("/addSpecies")
+	public String addSpecies(@RequestParam("genusId") int id, @RequestParam("name") String newSpeciesName) {
+		
+		Genus selected = genusRepo.findOne(id);
+		Fish newSpecies = new Fish(selected, newSpeciesName);
+		fishRepo.save(newSpecies);
+		
+		return "redirect:/genus?id=" + id;
+	}
+	
+	@RequestMapping("/species/delete")
+	public String deleteSpecies(@RequestParam("speciesId") long speciesId) {
+		
+		Fish toDelete = fishRepo.findOne(speciesId);
+		int genusId = toDelete.getGenus().getId();
+		
+		fishRepo.delete(toDelete);
+		
+		return "redirect:/genus?id=" + genusId;
+	}
 }
