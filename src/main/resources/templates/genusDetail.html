@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title th:text="'Details for ' + ${genus.name}" />
+</head>
+<body>
+	<h1 th:text="'Details for ' + ${genus.name}" />
+	<p th:text="${genus.description}" />
+	
+	<h2>Fishes:</h2>
+	<ul>
+		<li th:each="fish: ${genus.fishes}" th:text="${fish.species}" />
+	</ul>
+</body>
+</html>

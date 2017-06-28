@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Genera</title>
+</head>
+<body>
+	<h1>Genera</h1>
+	
+	<ul>
+		<li th:each="genus: ${genera}"><a th:href="@{/genus(id=${genus.id})}" th:text="${genus.name}" /></li>
+	</ul>
+</body>
+</html>

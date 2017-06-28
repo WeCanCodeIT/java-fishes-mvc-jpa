@@ -3,6 +3,7 @@ package org.wecancodeit.fishes;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Fish {
@@ -11,7 +12,8 @@ public class Fish {
 	@GeneratedValue
 	private Long id;
 
-	private String genus;
+	@ManyToOne
+	private Genus genus;
 	private String species;
 	
 	private boolean tropical;
@@ -23,7 +25,7 @@ public class Fish {
 		return id;
 	}
 	
-	public String getGenus() {
+	public Genus getGenus() {
 		return genus;
 	}
 	public String getSpecies() {
@@ -48,27 +50,27 @@ public class Fish {
 	 */
 	private Fish() {}
 	
-	public Fish(String genus, String species) {
+	public Fish(Genus genus, String species) {
 		this(genus, species, true, true);
 	}
 	
-	public Fish(String genus, String species, String image) {
+	public Fish(Genus genus, String species, String image) {
 		this(genus, species, true, true, image);
 	}
 	
-	public Fish(String genus, String species, boolean tropical, boolean freshwater) {
+	public Fish(Genus genus, String species, boolean tropical, boolean freshwater) {
 		this.genus = genus;
 		this.species = species;
 		this.tropical = tropical;
 		this.freshwater = freshwater;
 	}
 	
-	public Fish(String genus, String species, boolean tropical, boolean freshwater, String image) {
+	public Fish(Genus genus, String species, boolean tropical, boolean freshwater, String image) {
 		this(genus, species, tropical, freshwater);
 		this.image = image;
 	}
 
 	public String buildBinomialName() {
-		return genus + " " + species;
+		return genus.getName() + " " + species;
 	}
 }
