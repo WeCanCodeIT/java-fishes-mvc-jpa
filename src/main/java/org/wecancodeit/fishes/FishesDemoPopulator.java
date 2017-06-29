@@ -16,7 +16,7 @@ public class FishesDemoPopulator implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		Genus neolamprologus = new Genus("Neolamprologus", "Neolamprologus is a genus of cichlids endemic to eastern Africa with all but one species, Neolamprologus devosi from the Malagarasi River"); 
+		Genus neolamprologus = new Genus("Neolamprologus", "Neolamprologus is a genus of cichlids endemic to eastern Africa with all but one species, Neolamprologus devosi from the Malagarasi River, occurring in Lake Tanganyika. It is the largest genus of cichlids in Lake Tanganyika and also the largest genus in the tribe Lamprologini, which includes Altolamprologus, Chalinochromis, Julidochromis, Lamprologus, Lepidiolamprologus, Telmatochromis and Variabilichromis. The latter is a monotypic genus doubtfully distinct from Neolamprologus."); 
 		genusRepo.save(neolamprologus);
 		Fish fish = new Fish(neolamprologus, "brevis");
 		fishesRepo.save(fish);

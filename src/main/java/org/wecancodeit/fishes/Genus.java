@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -15,6 +16,8 @@ public class Genus {
 	private int id;
 	
 	private String name;
+	
+	@Lob
 	private String description;
 	
 	@OneToMany(mappedBy="genus")

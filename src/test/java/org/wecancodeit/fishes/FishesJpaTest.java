@@ -82,4 +82,5 @@ public class FishesJpaTest {
 		Fish testFish = new Fish(null, "test species name");
 		fishRepository.save(testFish);
 	}
+
 }
