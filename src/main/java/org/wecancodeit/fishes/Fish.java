@@ -12,7 +12,7 @@ public class Fish {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(optional=false)
 	private Genus genus;
 	private String species;
 	

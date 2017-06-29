@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class FishesController {
 
 	@Resource
-	private FishesRepository fishRepo;
+	private FishRepository fishRepo;
 	
 	@Resource
 	private GenusRepository genusRepo;

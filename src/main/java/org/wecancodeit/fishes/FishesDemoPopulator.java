@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class FishesDemoPopulator implements CommandLineRunner {
 
 	@Resource
-	private FishesRepository fishesRepo;
+	private FishRepository fishesRepo;
 	
 	@Resource
 	private GenusRepository genusRepo;
