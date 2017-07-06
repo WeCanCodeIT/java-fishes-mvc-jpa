@@ -1,6 +1,10 @@
 package org.wecancodeit.fishes;
 
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -49,6 +53,8 @@ public class FishesJpaTest {
 
 	private Genus testGenus;
 
+	private Set<Food> foods = new HashSet<>(asList(new Food("flake"), new Food("freeze dried mysis")));
+	
 	/**
 	 * A method annotated with @{@link Before} runs before <em>each</em> test
 	 * method. Such methods are used to do common setup for tests.
@@ -67,7 +73,7 @@ public class FishesJpaTest {
 	 */
 	@Test
 	public void shouldSaveAFish() {
-		Fish testFish = new Fish(testGenus, "test species name");
+		Fish testFish = new Fish(testGenus, "test species name", foods);
 		fishRepository.save(testFish);
 	}
 
@@ -79,7 +85,7 @@ public class FishesJpaTest {
 	 */
 	@Test(expected = DataIntegrityViolationException.class)
 	public void shouldFailOnSaveIfGenusIsNull() {
-		Fish testFish = new Fish(null, "test species name");
+		Fish testFish = new Fish(null, "test species name", foods);
 		fishRepository.save(testFish);
 	}
 

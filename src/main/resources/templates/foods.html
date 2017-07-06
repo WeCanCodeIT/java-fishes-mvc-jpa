@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Foods</title>
+</head>
+<body>
+	<h1>Foods</h1>
+
+	<form>
+		<ul>
+			<li th:each="food: ${foods}"><span th:text="${food.name}" />
+			<button th:formaction="@{/foods/delete/{foodId}(foodId=${food.id})}">delete</button></li>
+		</ul>
+	</form>
+</body>
+</html>

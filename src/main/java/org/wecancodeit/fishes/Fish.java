@@ -1,8 +1,11 @@
 package org.wecancodeit.fishes;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -15,6 +18,9 @@ public class Fish {
 	@ManyToOne(optional=false)
 	private Genus genus;
 	private String species;
+	
+	@ManyToMany
+	private Set<Food> foods;
 	
 	private boolean tropical;
 	private boolean freshwater;
@@ -45,13 +51,18 @@ public class Fish {
 		return image != null;
 	}
 	
+	public Set<Food> getFoods() {
+		return foods;
+	}
+
 	/**
 	 * JPA needs a no argument constructor
 	 */
 	private Fish() {}
 	
-	public Fish(Genus genus, String species) {
+	public Fish(Genus genus, String species, Set<Food> foods) {
 		this(genus, species, true, true);
+		this.foods = foods;
 	}
 	
 	public Fish(Genus genus, String species, String image) {
@@ -72,5 +83,9 @@ public class Fish {
 
 	public String buildBinomialName() {
 		return genus.getName() + " " + species;
+	}
+	
+	public void remove(Food food) {
+		foods.remove(food);
 	}
 }

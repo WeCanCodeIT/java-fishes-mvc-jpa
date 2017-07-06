@@ -1,9 +1,15 @@
 package org.wecancodeit.fishes;
 
+import static java.util.Collections.emptySet;
+
+import java.util.Collections;
+import java.util.HashSet;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,6 +21,9 @@ public class FishesController {
 	
 	@Resource
 	private GenusRepository genusRepo;
+	
+	@Resource
+	private FoodRepository foodRepo;
 	
 	@RequestMapping("/")
 	public String showHomepage() {
@@ -51,7 +60,7 @@ public class FishesController {
 	public String addSpecies(@RequestParam("genusId") int id, @RequestParam("name") String newSpeciesName) {
 		
 		Genus selected = genusRepo.findOne(id);
-		Fish newSpecies = new Fish(selected, newSpeciesName);
+		Fish newSpecies = new Fish(selected, newSpeciesName, new HashSet<>(Collections.singleton(foodRepo.findByName("flake"))));
 		fishRepo.save(newSpecies);
 		
 		return "redirect:/genus?id=" + id;
@@ -67,4 +76,22 @@ public class FishesController {
 		
 		return "redirect:/genus?id=" + genusId;
 	}
+	
+	@RequestMapping("/foods")
+	public String showFoods(Model model) {
+		model.addAttribute("foods", foodRepo.findAll());
+		return "foods";
+	}
+	
+	@RequestMapping("/foods/delete/{id}")
+	public String deleteFood(@PathVariable long id) {
+		Food toDelete = foodRepo.findOne(id);
+		for(Fish fish: toDelete.getFishes()) {
+			fish.remove(toDelete);
+			fishRepo.save(fish);
+		}
+		foodRepo.delete(toDelete);
+		return "redirect:/foods";
+	}
+	
 }
