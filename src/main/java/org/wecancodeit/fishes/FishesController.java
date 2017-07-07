@@ -1,7 +1,5 @@
 package org.wecancodeit.fishes;
 
-import static java.util.Collections.emptySet;
-
 import java.util.Collections;
 import java.util.HashSet;
 
@@ -60,7 +58,7 @@ public class FishesController {
 	public String addSpecies(@RequestParam("genusId") int id, @RequestParam("name") String newSpeciesName) {
 		
 		Genus selected = genusRepo.findOne(id);
-		Fish newSpecies = new Fish(selected, newSpeciesName, new HashSet<>(Collections.singleton(foodRepo.findByName("flake"))));
+		Fish newSpecies = new Fish(selected, newSpeciesName, foodRepo.findByName("flake"));
 		fishRepo.save(newSpecies);
 		
 		return "redirect:/genus?id=" + id;
@@ -83,10 +81,12 @@ public class FishesController {
 		return "foods";
 	}
 	
+	// could have done /foods/delete?foodId=42
 	@RequestMapping("/foods/delete/{id}")
 	public String deleteFood(@PathVariable long id) {
 		Food toDelete = foodRepo.findOne(id);
-		for(Fish fish: toDelete.getFishes()) {
+		for(Fish fish: toDelete.getEatenBy()) {
+			// this is the same as fish.getFoods().remove(toDelete)
 			fish.remove(toDelete);
 			fishRepo.save(fish);
 		}

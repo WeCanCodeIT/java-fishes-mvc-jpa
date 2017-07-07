@@ -1,5 +1,7 @@
 package org.wecancodeit.fishes;
 
+import java.util.HashSet;
+import java.util.Arrays;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -19,6 +21,9 @@ public class Fish {
 	private Genus genus;
 	private String species;
 	
+	/**
+	 * The owner does NOT have the "mappedBy".
+	 */
 	@ManyToMany
 	private Set<Food> foods;
 	
@@ -60,9 +65,9 @@ public class Fish {
 	 */
 	private Fish() {}
 	
-	public Fish(Genus genus, String species, Set<Food> foods) {
+	public Fish(Genus genus, String species, Food... foods) {
 		this(genus, species, true, true);
-		this.foods = foods;
+		this.foods = new HashSet<>(Arrays.asList(foods));
 	}
 	
 	public Fish(Genus genus, String species, String image) {

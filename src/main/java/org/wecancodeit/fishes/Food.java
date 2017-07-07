@@ -13,12 +13,16 @@ public class Food {
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	private String name;
 
-	@ManyToMany(mappedBy="foods")
-	private Set<Fish> fishes;
-	
+	/**
+	 * "mappedBy" indicates what instance variable on the other class holds the
+	 * other end of this relationship
+	 */
+	@ManyToMany(mappedBy = "foods")
+	private Set<Fish> eatenBy;
+
 	public long getId() {
 		return id;
 	}
@@ -26,14 +30,15 @@ public class Food {
 	public String getName() {
 		return name;
 	}
-	
-	public Set<Fish> getFishes() {
-		return fishes;
+
+	public Set<Fish> getEatenBy() {
+		return eatenBy;
 	}
 
 	// for JPA
-	private Food() {}
-	
+	private Food() {
+	}
+
 	public Food(String name) {
 		this.name = name;
 	}
