@@ -36,10 +36,16 @@ public class Food {
 	}
 
 	// for JPA
+	@SuppressWarnings("unused")
 	private Food() {
 	}
 
 	public Food(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "food: " + name;
 	}
 }

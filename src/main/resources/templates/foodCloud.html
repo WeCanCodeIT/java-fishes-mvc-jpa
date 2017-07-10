@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Food Cloud</title>
+</head>
+<body>
+	<h1>Foods</h1>
+
+	<p>
+		Lowest count: <span th:text="${lowestCount}" />
+	</p>
+	<p>
+		Highest count: <span th:text="${highestCount}" />
+	</p>
+
+	<p th:each="currentCount: ${foods.values()}"
+		th:with="fraction=${(currentCount - lowestCount)/(highestCount - lowestCount)}">
+		count = <span th:text="${currentCount}" />, fraction of max = <span
+			th:text="${fraction}" />, font size = <span
+			th:text="${fraction * 24 + 12} + 'px'" />
+	</p>
+	<div>
+		<!-- foods is a map of food -> count -->
+		<p th:text="${foods}" />
+		<span th:each="currentFood: ${foods.keySet()}"
+			th:with="currentCount=${foods.get(currentFood)},fraction=${(currentCount - lowestCount)/(highestCount - lowestCount)}">
+			<a th:text="${currentFood.name} + ' ' + ${foods.get(currentFood)}"
+			th:href="@{/food/show(id=${currentFood.id})}"
+			th:style="'font-size: ' + ${fraction * 24 + 12} + 'px'" />
+		</span>
+	</div>
+</body>
+</html>
