@@ -53,8 +53,8 @@ public class FishesJpaTest {
 
 	private Genus testGenus;
 
-	private Set<Food> foods = new HashSet<>(asList(new Food("flake"), new Food("freeze dried mysis")));
-	
+	private Food[] foods = { new Food("flake"), new Food("freeze dried mysis") };
+
 	/**
 	 * A method annotated with @{@link Before} runs before <em>each</em> test
 	 * method. Such methods are used to do common setup for tests.

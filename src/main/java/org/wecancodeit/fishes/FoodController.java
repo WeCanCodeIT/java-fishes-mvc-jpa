@@ -10,12 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class TagController {
+@RequestMapping("/foods")
+public class FoodController {
 
 	@Resource
 	private FishRepository fishRepo;
 	
-	@RequestMapping("/food/cloud")
+	@RequestMapping("/cloud")
 	public String showCloud(Model model) {
 		
 		Map<Food, Integer> foodCounts = buildCounts();	
